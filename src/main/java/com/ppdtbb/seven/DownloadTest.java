@@ -4,7 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
@@ -37,6 +36,7 @@ public class DownloadTest {
 		}
 		outputStream.flush();
 		outputStream.close();
+		bufferedIn.close();
 	}
 	
 }

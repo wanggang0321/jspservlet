@@ -38,6 +38,7 @@ public class ResponseHeaderTest {
 			}
 			outputStream.flush();
 			outputStream.close();
+			inputStream.close();
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		} catch(IOException e) {

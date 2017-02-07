@@ -16,11 +16,13 @@ public class DownloadTest {
 	public void download(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		File file = new File("D:/work/test.doc");
 		String fileName = "测试.doc";
-		if(request.getHeader("User-Agent").toLowerCase().indexOf("firefox")>0
-				|| request.getHeader("User-Agent").toLowerCase().indexOf("chrome")>0) {
-			fileName = new String(fileName.getBytes("UTF-8"), "IOS8859-1"); //火狐浏览器
-		} else {
-			fileName = URLEncoder.encode(fileName, "UTF-8"); //IE浏览器
+		/*	IE的话，通过URLEncoder对filename进行UTF8编码。
+		而其他的浏览器（firefox、chrome、safari、opera），则要通过字节转换成ISO8859-1了。*/
+		Boolean flag= request.getHeader("User-Agent").toLowerCase().indexOf("like gecko")>0;
+		if (request.getHeader("User-Agent").toLowerCase().indexOf("MSIE") > 0 || flag){
+			fileName = URLEncoder.encode(fileName, "UTF-8");//IE浏览器
+		}else {
+			fileName = new String(fileName.getBytes("UTF-8"), "ISO8859-1");
 		}
 		InputStream inputStream = new FileInputStream(file);
 		BufferedInputStream bufferedIn = new BufferedInputStream(inputStream);
